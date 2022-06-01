@@ -2,7 +2,7 @@ use std::error::Error;
 
 use itertools_num::linspace;
 use ndarray::{self, Array1, Array2};
-use ndarray_linalg::{self, Solve};
+use ndarray_linalg::{self,Solve};
 
 type MyResult<R> = Result<R, Box<dyn Error>>;
 
@@ -35,6 +35,7 @@ impl SolveErrors {
         results: &SolveResults,
         initial: Option<f64>,
     ) -> SolveErrors {
+        println!("HERE");
         let mut norm_errors: Vec<f64> = results
             .all()
             .iter()
@@ -54,8 +55,11 @@ impl SolveErrors {
             .iter()
             .map(|(fe, _, _, cend)| fe.h * cend * cend)
             .sum();
+        println!("Results size : {}", results.solutions.len());
+        let m = fem.create_matrix_l(&results.finite_elements).0;
+        println!("Matrix size : {:?}", m.dim());
         let unorm = Array1::from(results.solutions.clone())
-            .dot(&fem.create_matrix_l(&results.finite_elements).0)
+            .dot(&m)
             .dot(&Array1::from(results.solutions.clone()))
             .sqrt();
         let enorm = enorm2.sqrt();

@@ -18,6 +18,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d468802bab17cbc0cc575e9b053f41e72aa36bfa6b7f55e3529ffa43161b97fa"
 
 [[package]]
+name = "blas-src"
+version = "0.6.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a25f136d1bcc6fc28330077511a0646aaf75bc894e5532b1a33a93d814272328"
+
+[[package]]
 name = "cauchy"
 version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -59,9 +65,13 @@ dependencies = [
 name = "hadfem"
 version = "0.1.0"
 dependencies = [
+ "blas-src",
+ "cblas-sys",
  "itertools-num",
+ "lapacke",
  "ndarray",
  "ndarray-linalg",
+ "openblas-src",
 ]
 
 [[package]]
@@ -89,6 +99,26 @@ name = "lapack-sys"
 version = "0.12.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c1d3a8a9f07310243de6c6226f039f14bce8d2f4c96b5d30ddbcfa31eb4e94ad"
+dependencies = [
+ "libc",
+]
+
+[[package]]
+name = "lapacke"
+version = "0.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8425aee3cfc69f1e907f8487a291d1ddebfd0db2d74493b4e443be0618648744"
+dependencies = [
+ "lapacke-sys",
+ "libc",
+ "num-complex",
+]
+
+[[package]]
+name = "lapacke-sys"
+version = "0.1.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2f7d0817c6f4a6029f3b153de01d6498dcf9df659a7536c58bd8df5cd3ccaa6e"
 dependencies = [
  "libc",
 ]
@@ -180,6 +210,12 @@ checksum = "578ede34cf02f8924ab9447f50c28075b4d3e5b269972345e7e0372b38c6cdcd"
 dependencies = [
  "autocfg",
 ]
+
+[[package]]
+name = "openblas-src"
+version = "0.9.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "84629d1d4f9f40d3f9e4756dae33c6af50d3c2fcc186558dac65bf55141ade6b"
 
 [[package]]
 name = "ppv-lite86"
